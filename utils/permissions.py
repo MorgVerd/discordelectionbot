@@ -18,6 +18,20 @@ class Permissions():
             if (roleid == str(role.id)): return (True, "User has role")
         return (False, "You are missing the needed role to do this.")
 
+    async def permissions_isgov(self, user, excludeRoot = False):
+        root = 674620226494791720 # 674620226494791720
+        idBank = [706267350458040363, 700362039461150773] # Elected Admin Powers, Council Powers
+        govRoleIDs = []
+        if excludeRoot:
+            govRoleIDs = idBank
+        else:
+            govRoleIDs.append(root)
+            for ID in idBank:
+                govRoleIDs.append(ID)
 
-def setup(bot):
-    bot.add_cog(Permissions(bot))
+        for govRoleID in govRoleIDs:
+            check, reason = (await self.bot.hasRole(self, user, str(govRoleID)))
+            if check:
+                return (True, "User has role")
+        return (False, "You are missing the needed role to do this.")
+

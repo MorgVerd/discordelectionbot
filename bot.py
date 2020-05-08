@@ -25,18 +25,13 @@ bot.cachedMembers = []
 bot.electionCategory = None
 bot.electionChannels = []
 bot.hasRole = Permissions.permissions_hasrole
+bot.isGov = Permissions.permissions_isgov
+bot.cachedGovRole = None
 
 try:
     bot.remove_command("help")
 except Exception as e: 
     print("[Help Command] ".format(e))
-
-@bot.event
-async def on_ready():
-    print('Logged in as '+bot.user.name+' (ID:'+str(bot.user.id)+')')
-
-
-
 
 if __name__ == "__main__":
     for filename in os.listdir('./cogs'):
